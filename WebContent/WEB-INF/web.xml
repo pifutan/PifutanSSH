@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>Pifutan</display-name>
+	<!--欢迎页 -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+	<!-- Spring读取applicationContext.xml文件 不写默认Spring需要读取 WebContent\WEB-INF\applicationContext.xml -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<!-- 改变默认读取路径为src目录下的 applicationContext.xml 在改变的路径下还是没找到，便自动到默认路径查找 -->
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+	<!-- Spring监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- struts2.5过滤配置 -->
+	<filter>
+		<filter-name>struts 2.5</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts 2.5</filter-name>
+		<!-- <url-pattern>/*</url-pattern> -->
+		<url-pattern>*.action</url-pattern>
+		<url-pattern>*.do</url-pattern>
+		<url-pattern>*.tan</url-pattern>
+	</filter-mapping>
+
+	<!-- 编码过滤器 -->
+	<mime-mapping>
+		<extension>htm</extension>
+		<mime-type>text/html;charset=utf-8</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>html</extension>
+		<mime-type>text/html;charset=utf-8</mime-type>
+	</mime-mapping>
+	
+</web-app>
